@@ -24,6 +24,26 @@ L'employé aimerait pouvoir obtenir une place de parking réservée pour une pé
     - Obligations de téléchargement
     - développement plus intensif 
 
+# System de design
+
+  Microservice:
+
+    + scalable
+    + efficient
+    + séparation des responsabilités
+    - complexe
+    - debugging complexe 
+
+  Monolithique:
+  
+    + facile de développement
+    + single point debug
+    - faible scalabilité
+    - single point of failure
+    
+# System choice
+  Monolithique => influence sur le facile a faire. Pas de probleme de scalabilité pour une application qui semble restrainte a un use case d'entreprise unique. 
+
 # Stack choisie
   App Android/IOS choisie
 
