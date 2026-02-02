@@ -3,7 +3,6 @@ Steven CHOUK
 Karl OELSCHLAGER
 
 # Architecture Decision Record (ADR)
-
 # Pour qui ?
 Pour les employés qui veulent réserver une place de parking dans le parking de l'entreprise.
 
@@ -62,7 +61,7 @@ BackEnd :
    API : 
 
     - Kotlin / Quarkus / Spring Boot
-    - NodeJs 
+    - Express 
 
    DB:
 
@@ -101,7 +100,7 @@ BackEnd :
         -- scalabilité plus complexe
         -- moins de connaissance forte
 ---
-     Typescript NodesJs :
+     Typescript Express :
       + connaissance technique et expérience dans l'équipe.
       + facilité de bootstrap
       + lourde librairie
