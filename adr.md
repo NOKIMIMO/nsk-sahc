@@ -8,7 +8,7 @@ Karl OELSCHLAGER
 Pour les employés qui veulent réserver une place de parking dans le parking de l'entreprise.
 
 # Contexte
-L'user aimerait pouvoir obtenir une place de parking réservée pour une période déterminée sans avoir à s'y rendre et sans risque de ne pas avoir de place disponible.
+L'user aimerait pouvoir obtenir une place de parking réservée pour une période déterminée sans avoir à s'y rendre et sans risque de ne pas avoir de place disponible. N'ayant que 60 places possibles et la demande étant une demande SPECIFIQUE a une demande interne, il est concevable que nous aurons ~80 utilisateurs. La demande aussi appelle a un nombre et un layout particulier non évolutif. Nous pouvons considèrer que, dans le contexte, notre volumétrie et faible et a faible voir aucune évolution futur. 
 
 # Options 
   Applications Web spécifique au réseaux employé avec identification matricule?
@@ -107,7 +107,7 @@ BackEnd :
       + lourde librairie
       - difficulté de scale a haut volume
 
-Côté API il est aussi possible d'utiliser une architecture evennementielle plutot que 100% API. Un Kafka ou un RabbitMQ peuvent etre mit en liaisons avec les systemes et on pourrait utiliser leur puissance pour certains systeme de queue de message/ mail.
+Côté API il est aussi possible d'utiliser une architecture evenementielle plutot que 100% API. Un Kafka ou un RabbitMQ peuvent etre mit en liaisons avec les systemes et on pourrait utiliser leur puissance pour certains systeme de queue de message/ mail.
 Cette piste est mit de côté pour son problème de compléxité ajouté, de systeme boite grise ou l'on doit ce faire a l'ouil utiliser plutot que travailler avec. 
 
 Pour remmédier a cela l'API devra prendre en compte buffer de message envoyé et de message ayant raté a l'envoie (pour les renvoyer plus tard). 
