@@ -1,6 +1,3 @@
-import e = require("express")
-
- 
 
 enum userType {
     EMPLOYEE = 0,
