@@ -48,7 +48,11 @@ L'user aimerait pouvoir obtenir une place de parking réservée pour une périod
   Monolithique => influence sur le facile a faire. Pas de probleme de scalabilité pour une application qui semble restrainte a un use case d'entreprise unique. 
 
 # Stack choisie
-  App Android/IOS choisie
+  Simple Site web sans framework => faible dépendance, ne sert que a afficher aujourd'hui.
+
+  Pourras etre passé a une version plus complexe (type React) si le besoin augmente. 
+
+  <!-- App Android/IOS choisie -->
 
 # Stack technique 
 
