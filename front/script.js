@@ -6,6 +6,19 @@ const container = document.getElementById('parking-container');
 const btnValider = document.getElementById('btn-valider');
 const btnAnnuler = document.getElementById('btn-annuler');
 
+// Add admin controls
+const adminContainer = document.createElement('div');
+adminContainer.id = 'admin-controls';
+adminContainer.style.cssText = 'margin: 10px 0; padding: 10px; background-color: #f0f0f0; border-radius: 5px;';
+adminContainer.innerHTML = `
+    <button id="btn-expire-selected" style="margin-right: 10px; padding: 8px 15px; background-color: #ff9800; color: white; border: none; border-radius: 4px; cursor: pointer;">Expirer sélectionnées</button>
+    <button id="btn-expire-all" style="padding: 8px 15px; background-color: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer;">Expirer tout</button>
+`;
+document.body.insertBefore(adminContainer, container);
+
+const btnExpireSelected = document.getElementById('btn-expire-selected');
+const btnExpireAll = document.getElementById('btn-expire-all');
+
 async function fetchPlaces() {
     try {
         const response = await fetch('http://localhost:3000/places');
@@ -135,3 +148,71 @@ btnValider.addEventListener('click', async () => {
     const places = await fetchPlaces();
     initParking(places);
 })();
+
+btnExpireSelected.addEventListener('click', async () => {
+    if (selectedSpots.size === 0) {
+        alert('Aucune place sélectionnée');
+        return;
+    }
+    
+    if (!confirm(`Êtes-vous sûr ? Cela expirera ${selectedSpots.size} réservation(s).`)) {
+        return;
+    }
+    
+    const labels = Array.from(selectedSpots);
+    
+    try {
+        const response = await fetch('http://localhost:3000/reservations/expire/selected', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ labels })
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+            alert(`✓ ${result.count} réservation(s) expirée(s)`);
+            const places = await fetchPlaces();
+            initParking(places);
+            selectedSpots.clear();
+            updateButtons();
+        } else {
+            alert('Erreur: ' + result.error);
+        }
+    } catch (error) {
+        console.error('Error expiring reservations:', error);
+        alert('Erreur lors de l\'expiration des réservations');
+    }
+});
+
+btnExpireAll.addEventListener('click', async () => {
+    if (!confirm('Êtes-vous sûr ? Cela expirera TOUTES les réservations.')) {
+        return;
+    }
+    
+    try {
+        const response = await fetch('http://localhost:3000/reservations/expire/all', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+            alert(`✓ ${result.count} réservation(s) expirée(s)`);
+            const places = await fetchPlaces();
+            initParking(places);
+            selectedSpots.clear();
+            updateButtons();
+        } else {
+            alert('Erreur: ' + result.error);
+        }
+    } catch (error) {
+        console.error('Error expiring all reservations:', error);
+        alert('Erreur lors de l\'expiration des réservations');
+    }
+});

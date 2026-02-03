@@ -17,6 +17,39 @@ export async function expireOldReservations(ds?: DataSource) {
     await repo.save(toExpire)
 }
 
+export async function expireSelectedReservations(placeLabels: string[], ds?: DataSource) {
+    const dataSrc = ds ?? AppDataSource
+    const placeRepo = dataSrc.getRepository(Place)
+    const resRepo = dataSrc.getRepository(Reservation)
+    
+    const places = await placeRepo.find({ where: placeLabels.map(label => ({ label })) })
+    const placeIds = places.map(p => p.id)
+    
+    const reservations = await resRepo.find({ where: { status: ReservationStatus.LOCKED } })
+    const toExpire = reservations.filter(r => placeIds.includes(r.place.id))
+    
+    if (toExpire.length === 0) return []
+    
+    for (const r of toExpire) {
+        r.status = ReservationStatus.EXPIRED
+    }
+    
+    return await resRepo.save(toExpire)
+}
+
+export async function expireAllReservations(ds?: DataSource) {
+    const repo = (ds ?? AppDataSource).getRepository(Reservation)
+    const allLocked = await repo.find({ where: { status: ReservationStatus.LOCKED } })
+    
+    if (allLocked.length === 0) return []
+    
+    for (const r of allLocked) {
+        r.status = ReservationStatus.EXPIRED
+    }
+    
+    return await repo.save(allLocked)
+}
+
 export async function isPlaceLocked(placeId: number, ds?: DataSource) {
     const repo = (ds ?? AppDataSource).getRepository(Reservation)
     const now = new Date()
