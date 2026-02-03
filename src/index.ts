@@ -1,16 +1,49 @@
-import express, { Application, Request, Response } from 'express';
-import pool from './db/pg';
+import { AppDataSource } from "./data-source"
+import { User } from "./entity/User"
+import { Place } from "./entity/Place"
+import userType from "./type/UserType"
+import { createReservation, expireOldReservations } from "./service/reservationService"
+import express from "express"
+import userRouter from "./routes/user"
+import reservationRouter from "./routes/reservation"
+import placeRouter from "./routes/place"
+import authRouter from "./routes/auth"
 
-const app: Application = express();
-const PORT = 3000;
+AppDataSource.initialize().then(async () => {
 
+    // Run pending migrations (will run only once per migration)
+    await AppDataSource.runMigrations()
 
+    // fetch seeded user/place created by migration
+    const users = await AppDataSource.manager.find(User)
+    const places = await AppDataSource.manager.find(Place)
+    const user = users[0]
+    const place = places[0]
 
+    console.log("Seeded user:", user)
+    console.log("Seeded place:", place)
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello, TypeScript + Express!');
-});
+    // Example reservation attempt
+    if (user && place) {
+        try {
+            const reservation = await createReservation(place.id, user.id)
+            console.log("Reservation created:", reservation)
+        } catch (e) {
+            console.error("Could not create reservation:", e.message)
+        }
+    }
 
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-});
+    await expireOldReservations()
+
+    // Start express and mount route skeletons
+    const app = express()
+    app.use(express.json())
+    app.use('/users', userRouter)
+    app.use('/reservations', reservationRouter)
+    app.use('/places', placeRouter)
+    app.use('/auth', authRouter)
+
+    const PORT = process.env.PORT ? Number(process.env.PORT) : 3000
+    app.listen(PORT, () => console.log(`Server listening on ${PORT}`))
+
+}).catch(error => console.log(error))

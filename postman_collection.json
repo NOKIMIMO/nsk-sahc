@@ -1,0 +1,38 @@
+{
+  "info": {
+    "name": "NSK-SAHC API",
+    "_postman_id": "nsk-sahc",
+    "description": "Collection for testing User/Reservation/Place endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create user",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": { "mode": "raw", "raw": "{ \"firstName\": \"Tim\", \"lastName\": \"Saw\", \"status\": 0 }" },
+        "url": { "raw": "http://localhost:3000/users", "protocol": "http", "host": [ "localhost" ], "port": "3000", "path": [ "users" ] }
+      }
+    },
+    {
+      "name": "Check place availability",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "http://localhost:3000/places/1/availability", "protocol": "http", "host": [ "localhost" ], "port": "3000", "path": [ "places", "1", "availability" ] }
+      }
+    },
+    {
+      "name": "Create reservation",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": { "mode": "raw", "raw": "{ \"placeId\": 1, \"userId\": 1 }" },
+        "url": { "raw": "http://localhost:3000/reservations", "protocol": "http", "host": [ "localhost" ], "port": "3000", "path": [ "reservations" ] }
+      }
+    }
+  ]
+}

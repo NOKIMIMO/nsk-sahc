@@ -7,7 +7,9 @@
     "dev": "nodemon",
     "lint": "eslint 'src/**/*.{ts,js}'",
     "format": "prettier --write .",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "build": "tsc -p tsconfig.json",
+    "start": "node build/src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +27,7 @@
     "jest": "^30.2.0",
     "nodemon": "^3.1.11",
     "prettier": "^3.8.1",
+    "sqlite3": "^5.0.2",
     "ts-jest": "^29.4.6",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
@@ -33,6 +36,7 @@
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "pg": "^8.18.0",
-    "typeorm": "^0.3.28"
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.6"
   }
 }
