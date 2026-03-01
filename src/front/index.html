@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NSK Parking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
+            <div style="flex: 1;">
+                <h1 style="margin: 10px 0 5px 0;">Gestion Parking NSK</h1>
+                <p style="margin: 0 0 5px 0; font-size: 0.9em;">Réservez votre place de parking jusqu'à 5 jours ouvrés</p>
+            </div>
+            <div style="text-align: right;">
+                <span id="user-info" style="font-size: 0.9em; margin-right: 15px; color: white;"></span>
+                <button id="btn-logout" style="padding: 8px 16px; border-radius: 4px; border: 2px solid white; background: transparent; color: white; font-weight: bold; cursor: pointer; font-size: 0.9em;">Déconnexion</button>
+            </div>
+        </div>
+        <div id="nav-links" style="text-align: center; padding: 5px 0 10px 0;">
+            <a href="/dashboard.html" id="link-dashboard" style="color: white; margin: 0 10px; text-decoration: underline; display: none;">Dashboard Manager</a>
+            <a href="/qr-codes.html" id="link-qrcodes" style="color: white; margin: 0 10px; text-decoration: underline; display: none;">QR Codes</a>
+        </div>
+    </header>
+    
+    <div id="checkin-section" style="background: #fff3cd; padding: 15px; text-align: center; border-bottom: 2px solid #ffc107;">
+        <h3 style="margin: 0 0 10px 0;">Check-in par QR Code</h3>
+        <p style="margin: 0 0 10px 0; font-size: 0.9em;">Scannez le QR code de votre place ou entrez le numéro manuellement</p>
+        <div style="display: flex; justify-content: center; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <input type="text" id="checkin-place" placeholder="Ex: A01" style="padding: 10px; border: 2px solid #ffc107; border-radius: 4px; width: 150px; font-size: 1em;">
+            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                <label for="checkin-time" style="font-size: 0.85em; margin-bottom: 3px;">Heure d'arrivée:</label>
+                <input type="time" id="checkin-time" style="padding: 10px; border: 2px solid #ffc107; border-radius: 4px; font-size: 1em;">
+            </div>
+            <button id="btn-checkin" style="padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Check-in</button>
+        </div>
+        <p id="checkin-message" style="margin: 10px 0 0 0; font-size: 0.9em; min-height: 20px;"></p>
+    </div>
+    
+    <div id="parking-container"></div>
+    
+    <div id="action-bar">
+        <button id="btn-valider" disabled>Valider</button>
+        <button id="btn-annuler" disabled>Annuler</button>
+    </div>
+    
+    <script src="/script.js"></script>
+</body>
+</html>

@@ -7,7 +7,7 @@ Karl OELSCHLAGER
 Pour les employés qui veulent réserver une place de parking dans le parking de l'entreprise.
 
 # Contexte
-L'user aimerait pouvoir obtenir une place de parking réservée pour une période déterminée sans avoir à s'y rendre et sans risque de ne pas avoir de place disponible. N'ayant que 60 places possibles et la demande étant une demande SPECIFIQUE a une demande interne, il est concevable que nous aurons ~80 utilisateurs. La demande aussi appelle a un nombre et un layout particulier non évolutif. Nous pouvons considèrer que, dans le contexte, notre volumétrie et faible et a faible voir aucune évolution futur. 
+L'user aimerait pouvoir obtenir une place de parking réservée pour une période déterminée sans avoir à s'y rendre et sans risque de ne pas avoir de place disponible. N'ayant que 60 places possibles et la demande étant une demande SPECIFIQUE a une demande interne, il est concevable que nous aurons ~60 utilisateurs (+/- 10%) MAXIMUM. La demande aussi appelle a un nombre et un layout particulier non évolutif. Nous pouvons considèrer que, dans le contexte, notre volumétrie et faible et a faible voir aucune évolution futur. 
 
 # Options 
   Applications Web spécifique au réseaux employé avec identification matricule?
@@ -45,14 +45,12 @@ L'user aimerait pouvoir obtenir une place de parking réservée pour une périod
     - single point of failure
     
 # System choice
-  Monolithique => influence sur le facile a faire. Pas de probleme de scalabilité pour une application qui semble restrainte a un use case d'entreprise unique. 
+  Monolithique => influence sur le facile a faire. Pas de probleme de scalabilité pour une application qui semble restrainte a un usecase d'entreprise unique. 
 
 # Stack choisie
   Simple Site web sans framework => faible dépendance, ne sert que a afficher aujourd'hui.
 
-  Pourras etre passé a une version plus complexe (type React) si le besoin augmente. 
-
-  <!-- App Android/IOS choisie -->
+  Back en Typescrypt avec express pour l'API  => facilité de codé vite, multiple package utile, apétance de l'équipe
 
 # Stack technique 
 
@@ -89,6 +87,31 @@ BackEnd :
       - pas intuitif
       - trés long a développé
       - Pas envie
+
+  WEB:
+    JS-based:
+      JS natif:
+        -- pas de typing
+        -- nécessité d'utiliser de DOM en continue
+        ++ TRES rapide a mettre en place
+
+      REACT :
+        ++ framework puissant avec beaucoup de différent module déja existant
+
+    PHP-based:
+
+      Laravel:
+        -- lourd
+        -- moins de connaissance forte
+
+      Natif:
+        -- lourd
+        -- lent a mettre en place
+        -- aucun dynamisme et nous forcerais a utiliser le JS 
+
+
+
+Pour l'interface, la solution web simple avec JS sera choisie. Bien que React est trés puissant, pour un petit projet de ce genre nous n'avons aucune utilité a avoir beaucoup de module quand nous alons de base nous restreindre au cas d'usage nécessaire. Le choix de l'Android avec Flutter aurait était aussi un choix trés intéréssant mais qui demande beaucoup plus de compétence et de temps a créer, pas intéréssant pour un projet en interne sans business expectations.
 
   API:
 
@@ -130,3 +153,6 @@ Une petite application interne, de réservation de place dans l'entreprise, ne m
       + Comme du SQL sans gestion admin de DB
       + Puissance de calcul scalable
       - Payant
+
+
+On utilisera SQL Postgres, simplement par habitude et connaissance de l'équipe avec l'outil. 

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - Parking NSK</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <h1>Parking NSK</h1>
+            <h2>Connexion</h2>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required autocomplete="email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" required autocomplete="current-password">
+                </div>
+                
+                <div id="error-message" class="error-message"></div>
+                
+                <button type="submit" class="btn-login">Se connecter</button>
+            </form>
+            
+            <div class="test-accounts">
+                <h3>Comptes de test</h3>
+                <p><strong>Mot de passe pour tous:</strong> password123</p>
+                <ul>
+                    <li><strong>Employé:</strong> jean.dupont@company.com</li>
+                    <li><strong>Employé:</strong> marie.martin@company.com</li>
+                    <li><strong>Secrétaire:</strong> sophie.bernard@company.com</li>
+                    <li><strong>Manager:</strong> pierre.dubois@company.com</li>
+                    <li><strong>Admin:</strong> admin@company.com</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Manager - NSK Parking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/dashboard.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div>
+                <h1>Dashboard Manager</h1>
+                <p>Statistiques et analyses du parking NSK</p>
+            </div>
+            <div class="user-role-selector">
+                <span id="user-info" style="margin-right: 15px; color: white;"></span>
+                <button id="btn-logout" style="padding: 8px 16px; border-radius: 4px; border: 2px solid white; background: transparent; color: white; font-weight: bold; cursor: pointer;">Déconnexion</button>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="nav-buttons">
+            <button onclick="location.href='/'">Retour à l'accueil</button>
+            <button onclick="location.href='/qr-codes.html'">QR Codes</button>
+            <button onclick="loadAnalytics()">Actualiser</button>
+        </div>
+        
+        <div id="loading" class="loading">
+            <i class="fas fa-spinner fa-spin"></i><br>
+            Chargement des statistiques...
+        </div>
+        
+        <div id="dashboard" style="display: none;">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-parking"></i></div>
+                    <h3>Places totales</h3>
+                    <div class="stat-value" id="total-places">-</div>
+                    <div class="stat-subtitle">Capacité du parking</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Places électriques</h3>
+                    <div class="stat-value" id="electric-places">-</div>
+                    <div class="stat-subtitle"><span id="electric-percentage">-</span>% du total</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-car"></i></div>
+                    <h3>Taux d'occupation actuel</h3>
+                    <div class="stat-value" id="current-occupancy">-</div>
+                    <div class="stat-subtitle"><span id="current-spots">-</span> places occupées</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Occupation moyenne (30j)</h3>
+                    <div class="stat-value" id="average-occupancy">-</div>
+                    <div class="stat-subtitle"><span id="average-spots">-</span> places en moyenne</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-calendar-check"></i></div>
+                    <h3>Réservations totales</h3>
+                    <div class="stat-value" id="total-reservations">-</div>
+                    <div class="stat-subtitle">Depuis le début</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="icon"><i class="fas fa-user-times"></i></div>
+                    <h3>Taux de no-show</h3>
+                    <div class="stat-value" id="no-show-rate">-</div>
+                    <div class="stat-subtitle"><span id="no-show-count">-</span> non présentations</div>
+                </div>
+            </div>
+            
+            <div class="chart-card">
+                <h2>Taux d'occupation actuel</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="occupancy-bar" style="width: 0%">0%</div>
+                </div>
+            </div>
+            
+            <div class="chart-card">
+                <h2>Réservations des 30 derniers jours</h2>
+                <p><strong>Total:</strong> <span id="recent-reservations">-</span></p>
+                <p><strong>Check-in effectués:</strong> <span id="checked-in">-</span></p>
+                <p><strong>No-show:</strong> <span id="no-shows">-</span></p>
+            </div>
+            
+            <div class="history-section">
+                <h2>
+                    <span>Historique des réservations</span>
+                    <button class="btn-export" onclick="exportHistory()">Exporter CSV</button>
+                </h2>
+                <p style="color: #666; margin-bottom: 15px;">Affichage des 50 dernières réservations</p>
+                <div style="overflow-x: auto;">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Place</th>
+                                <th>Utilisateur</th>
+                                <th>Date réservation</th>
+                                <th>Check-in</th>
+                                <th>Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-tbody">
+                            <tr><td colspan="6" style="text-align: center; padding: 30px; color: #999;">Chargement...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/dashboard.js"></script>
+</body>
+</html>

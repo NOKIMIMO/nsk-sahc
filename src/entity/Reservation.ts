@@ -4,7 +4,10 @@ import { User } from "./User"
 
 export enum ReservationStatus {
     LOCKED = "LOCKED",
+    CHECKED_IN = "CHECKED_IN",
     EXPIRED = "EXPIRED",
+    CANCELLED = "CANCELLED",
+    NO_SHOW = "NO_SHOW",
 }
 
 @Entity()
@@ -26,4 +29,13 @@ export class Reservation {
 
     @Column({ type: "timestamp" })
     expiresAt: Date
+
+    @Column({ type: "date" })
+    reservationDate: Date
+
+    @Column({ type: "timestamp", nullable: true })
+    checkedInAt: Date | null
+
+    @Column({ type: "boolean", default: false })
+    isCheckedIn: boolean
 }

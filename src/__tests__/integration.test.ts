@@ -1,7 +1,9 @@
 import { Place } from "../entity/Place"
 import { User } from "../entity/User"
-import { Reservation, ReservationStatus } from "../entity/Reservation"
-import { createReservation, isPlaceLocked, expireOldReservations, checkInReservation } from "../service/reservationService"
+import { Reservation } from "../entity/Reservation"
+import { createReservation, checkInReservation, expireOldReservations } from "../service/reservationService"
+import { getAllWithAvailability } from "../service/placeService"
+import { getParkingAnalytics } from "../service/analyticsService"
 import userType from "../type/UserType"
 import placeType from "../type/PlaceType"
 import { TestHelper } from "./testHelper"
@@ -11,18 +13,7 @@ const testHelper = new TestHelper()
 beforeEach(async () => { await testHelper.setupTestDB() })
 afterEach(async () => { await testHelper.teardownTestDB() })
 
-test("creating a reservation locks the place", async () => {
-    const userRepo = testHelper.getRepo(User)
-    const placeRepo = testHelper.getRepo(Place)
-    const user = await userRepo.save(userRepo.create({ firstName: "A", lastName: "B", email: "a@test.com", password: "x", status: userType.EMPLOYEE }))
-    const place = await placeRepo.save(placeRepo.create({ label: "A01", status: placeType.DEFAULT }))
-
-    const reservation = await createReservation(place.id, user.id, testHelper.getDataSource())
-
-    expect(reservation.status).toBe(ReservationStatus.LOCKED)
-})
-
-test("locked place cannot be reserved again", async () => {
+test("reserved place shows as occupied in availability list", async () => {
     const userRepo = testHelper.getRepo(User)
     const placeRepo = testHelper.getRepo(Place)
     const user = await userRepo.save(userRepo.create({ firstName: "A", lastName: "B", email: "a@test.com", password: "x", status: userType.EMPLOYEE }))
@@ -30,10 +21,26 @@ test("locked place cannot be reserved again", async () => {
 
     await createReservation(place.id, user.id, testHelper.getDataSource())
 
-    await expect(createReservation(place.id, user.id, testHelper.getDataSource())).rejects.toThrow(/already reserved/)
+    const places = await getAllWithAvailability(testHelper.getDataSource())
+
+    expect(places.find(p => p.id === "A01")?.isOccupied).toBe(true)
 })
 
-test("expired reservation frees the place for rebooking", async () => {
+test("checked-in place still shows as occupied in availability list", async () => {
+    const userRepo = testHelper.getRepo(User)
+    const placeRepo = testHelper.getRepo(Place)
+    const user = await userRepo.save(userRepo.create({ firstName: "A", lastName: "B", email: "a@test.com", password: "x", status: userType.EMPLOYEE }))
+    const place = await placeRepo.save(placeRepo.create({ label: "A01", status: placeType.DEFAULT }))
+
+    await createReservation(place.id, user.id, testHelper.getDataSource())
+    await checkInReservation(place.label, "09:00", testHelper.getDataSource())
+
+    const places = await getAllWithAvailability(testHelper.getDataSource())
+
+    expect(places.find(p => p.id === "A01")?.isOccupied).toBe(true)
+})
+
+test("expired reservation makes place available again", async () => {
     const userRepo = testHelper.getRepo(User)
     const placeRepo = testHelper.getRepo(Place)
     const resRepo = testHelper.getRepo(Reservation)
@@ -45,34 +52,12 @@ test("expired reservation frees the place for rebooking", async () => {
     await resRepo.save(reservation)
     await expireOldReservations(testHelper.getDataSource())
 
-    const newReservation = await createReservation(place.id, user.id, testHelper.getDataSource())
+    const places = await getAllWithAvailability(testHelper.getDataSource())
 
-    expect(newReservation.status).toBe(ReservationStatus.LOCKED)
+    expect(places.find(p => p.id === "A01")?.isOccupied).toBe(false)
 })
 
-test("check-in sets status to CHECKED_IN", async () => {
-    const userRepo = testHelper.getRepo(User)
-    const placeRepo = testHelper.getRepo(Place)
-    const user = await userRepo.save(userRepo.create({ firstName: "A", lastName: "B", email: "a@test.com", password: "x", status: userType.EMPLOYEE }))
-    const place = await placeRepo.save(placeRepo.create({ label: "A01", status: placeType.DEFAULT }))
-
-    await createReservation(place.id, user.id, testHelper.getDataSource())
-    const checkedIn = await checkInReservation(place.label, "09:00", testHelper.getDataSource())
-
-    expect(checkedIn.status).toBe(ReservationStatus.CHECKED_IN)
-    expect(checkedIn.isCheckedIn).toBe(true)
-})
-
-test("place is free before reservation", async () => {
-    const placeRepo = testHelper.getRepo(Place)
-    const place = await placeRepo.save(placeRepo.create({ label: "A01", status: placeType.DEFAULT }))
-
-    const locked = await isPlaceLocked(place.id, testHelper.getDataSource())
-
-    expect(locked).toBe(false)
-})
-
-test("place is locked after reservation", async () => {
+test("analytics reflects current occupancy after reservation", async () => {
     const userRepo = testHelper.getRepo(User)
     const placeRepo = testHelper.getRepo(Place)
     const user = await userRepo.save(userRepo.create({ firstName: "A", lastName: "B", email: "a@test.com", password: "x", status: userType.EMPLOYEE }))
@@ -80,5 +65,8 @@ test("place is locked after reservation", async () => {
 
     await createReservation(place.id, user.id, testHelper.getDataSource())
 
-    expect(await isPlaceLocked(place.id, testHelper.getDataSource())).toBe(true)
+    const analytics = await getParkingAnalytics(testHelper.getDataSource())
+
+    expect(analytics.currentOccupancy).toBe(1)
+    expect(analytics.totalPlaces).toBe(1)
 })

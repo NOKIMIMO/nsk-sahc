@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Codes - NSK Parking</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="stylesheet" href="/qr-codes.css">
+</head>
+<body>
+    <header>
+        <h1>QR Codes pour Places de Parking</h1>
+        <div>
+            <span id="user-info" style="margin-right: 15px; color: white;"></span>
+            <button id="btn-logout" style="padding: 8px 16px; border-radius: 4px; border: 2px solid white; background: transparent; color: white; font-weight: bold; cursor: pointer;">Déconnexion</button>
+        </div>
+    </header>
+    
+    <div class="info no-print">
+        <h3>Instructions d'utilisation</h3>
+        <p><strong>Pour les administrateurs/secrétaires :</strong></p>
+        <ul>
+            <li>Cliquez sur "Imprimer tous les QR codes" pour générer une version imprimable</li>
+            <li>Découpez et plastifiez chaque QR code</li>
+            <li>Fixez chaque QR code à la place de parking correspondante</li>
+        </ul>
+        <p><strong>Pour les employés :</strong></p>
+        <ul>
+            <li>Scannez le QR code de votre place réservée avec votre smartphone</li>
+            <li>Ou entrez manuellement le numéro de place sur la page principale</li>
+            <li>Le check-in doit être effectué avant 11h00</li>
+        </ul>
+        <button onclick="window.print()">Imprimer tous les QR codes</button>
+        <button onclick="location.href='/'">Retour à l'accueil</button>
+    </div>
+    
+    <div id="qr-grid" class="qr-grid"></div>
+    
+    <script src="/qr-codes.js"></script>
+</body>
+</html>

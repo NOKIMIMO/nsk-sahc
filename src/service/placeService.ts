@@ -14,18 +14,16 @@ export async function getAllWithAvailability(ds?: DataSource) {
     
     const now = new Date()
     
-    // Récupérer toutes les places avec leurs réservations actives
     const places = await placeRepo
         .createQueryBuilder("place")
         .leftJoinAndSelect(
             "place.reservations",
             "reservation",
-            "reservation.status = :status AND reservation.expiresAt > :now",
-            { status: ReservationStatus.LOCKED, now }
+            "reservation.status IN (:...statuses) AND reservation.expiresAt > :now",
+            { statuses: [ReservationStatus.LOCKED, ReservationStatus.CHECKED_IN], now }
         )
         .getMany()
     
-    // Mapper les places avec leur disponibilité
     return places.map(place => ({
         id: place.label,
         isOccupied: place.reservations.length > 0,

@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { createReservation, expireAllReservations, expireSelectedReservations } from "../service/reservationService"
+import { createReservation, expireAllReservations, expireSelectedReservations, checkInReservation } from "../service/reservationService"
 import { AppDataSource } from "../data-source"
 import { Place } from "../entity/Place"
 import { User } from "../entity/User"
@@ -59,6 +59,23 @@ router.post("/by-label", async (req, res) => {
         })
     } catch (e) {
         res.status(500).json({ error: e.message })
+    }
+})
+
+router.post("/checkin/:placeLabel", async (req, res) => {
+    const { placeLabel } = req.params
+    const { time } = req.body
+    
+    try {
+        const reservation = await checkInReservation(placeLabel, time)
+        res.json({ 
+            message: "Check-in successful",
+            reservation,
+            placeLabel,
+            checkedInAt: reservation.checkedInAt
+        })
+    } catch (e) {
+        res.status(400).json({ error: e.message })
     }
 })
 

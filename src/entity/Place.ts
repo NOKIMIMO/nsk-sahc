@@ -8,7 +8,7 @@ export class Place {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column()
+    @Column({ unique: true })
     label: string
 
     @Column({ type: "int" })

@@ -1,0 +1,168 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36" version="27.0.8">
+  <diagram name="Page-1" id="dw0zuyskvQyUMyRlPAiV">
+    <mxGraphModel dx="3214" dy="1169" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-27" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="4.5" y="430" width="817" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2TzHBWTDV9gM15QuBqXD-10" target="2TzHBWTDV9gM15QuBqXD-12">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="270" y="750" />
+              <mxPoint x="270" y="750" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-30" value="Send reservation&amp;nbsp;&lt;div&gt;creation&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2TzHBWTDV9gM15QuBqXD-20">
+          <mxGeometry x="-0.6437" y="-3" relative="1" as="geometry">
+            <mxPoint x="48" y="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-10" value="Parking web UI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="60" y="740" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2TzHBWTDV9gM15QuBqXD-11" target="2TzHBWTDV9gM15QuBqXD-12">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="420" y="640" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-29" value="Send reservation&amp;nbsp;&lt;div&gt;creation&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2TzHBWTDV9gM15QuBqXD-21">
+          <mxGeometry x="-0.4446" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-11" value="Parking flutter UI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="60" y="625" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2TzHBWTDV9gM15QuBqXD-12" target="2TzHBWTDV9gM15QuBqXD-13">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="610" y="750" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-37" value="Retrieve reservation&lt;div&gt;information&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2TzHBWTDV9gM15QuBqXD-22">
+          <mxGeometry x="-0.7088" relative="1" as="geometry">
+            <mxPoint x="85" y="-95" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2TzHBWTDV9gM15QuBqXD-12" target="2TzHBWTDV9gM15QuBqXD-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-36" value="Get User Info from&amp;nbsp;&lt;div&gt;company AD&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2TzHBWTDV9gM15QuBqXD-23">
+          <mxGeometry x="-0.3096" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2TzHBWTDV9gM15QuBqXD-12" target="2TzHBWTDV9gM15QuBqXD-11">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="380" y="680" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-32" value="Send reservation&lt;div&gt;info&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2TzHBWTDV9gM15QuBqXD-31">
+          <mxGeometry x="0.318" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2TzHBWTDV9gM15QuBqXD-12" target="2TzHBWTDV9gM15QuBqXD-10">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="270" y="790" />
+              <mxPoint x="270" y="790" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-34" value="Send reservation&lt;div&gt;info&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2TzHBWTDV9gM15QuBqXD-33">
+          <mxGeometry x="-0.0077" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-12" value="Parking API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="360" y="740" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-13" value="Reservation&lt;div&gt;DB&lt;/div&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="570" y="480" width="80" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-14" value="company AD" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="720" y="480" width="80" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-15" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="90" y="950" width="420" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-16" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Legende&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="100" y="950" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-17" value="Azure&lt;div&gt;Service&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="270" y="1010" width="70" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-18" value="Application" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="150" y="1010" width="70" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-19" value="DataBase" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="383" y="1007.5" width="60" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-28" value="&lt;span style=&quot;font-size: 20px;&quot;&gt;Infra Optimal&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="50" y="490" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-38" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="58" y="30" width="710" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-24" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="2TzHBWTDV9gM15QuBqXD-38">
+          <mxGeometry width="710" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="2TzHBWTDV9gM15QuBqXD-38" source="2TzHBWTDV9gM15QuBqXD-1" target="2TzHBWTDV9gM15QuBqXD-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="230" y="200" />
+              <mxPoint x="230" y="200" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-5" value="Send reservation&amp;nbsp;&lt;div&gt;creation&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2TzHBWTDV9gM15QuBqXD-4">
+          <mxGeometry x="-0.0048" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-1" value="Parking UI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="2TzHBWTDV9gM15QuBqXD-38">
+          <mxGeometry x="10" y="190" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="2TzHBWTDV9gM15QuBqXD-38" source="2TzHBWTDV9gM15QuBqXD-2" target="2TzHBWTDV9gM15QuBqXD-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="240" y="240" />
+              <mxPoint x="240" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-7" value="Send reservation&lt;div&gt;info&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2TzHBWTDV9gM15QuBqXD-6">
+          <mxGeometry x="0.1315" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;" edge="1" parent="2TzHBWTDV9gM15QuBqXD-38" source="2TzHBWTDV9gM15QuBqXD-2" target="2TzHBWTDV9gM15QuBqXD-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-35" value="Retrieve all User and&amp;nbsp;&lt;div&gt;reservation info&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2TzHBWTDV9gM15QuBqXD-9">
+          <mxGeometry x="-0.1887" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-2" value="Parking API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="2TzHBWTDV9gM15QuBqXD-38">
+          <mxGeometry x="340" y="190" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-3" value="Parking&lt;div&gt;DB&lt;/div&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="2TzHBWTDV9gM15QuBqXD-38">
+          <mxGeometry x="590" y="30" width="80" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="2TzHBWTDV9gM15QuBqXD-26" value="&lt;span style=&quot;font-size: 20px;&quot;&gt;Infra Choisie&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="2TzHBWTDV9gM15QuBqXD-38">
+          <mxGeometry x="20" y="10" width="140" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

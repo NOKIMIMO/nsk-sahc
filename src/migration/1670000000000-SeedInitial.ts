@@ -15,12 +15,9 @@ export class SeedInitial1670000000000 implements MigrationInterface {
         for(let i = 1; i <= 10; i++) {
             await queryRunner.query(`INSERT INTO "place"("label","status") VALUES ($1,$2)`, ['F' + i.toString().padStart(2, '0'), 1])
         }
-
-        await queryRunner.query(`INSERT INTO "user"("firstName","lastName","status") VALUES ($1,$2,$3)`, ['Timber','Saw', 0])
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        // Remove seeded rows (best-effort)
         await queryRunner.query(`DELETE FROM "reservation"`)
         await queryRunner.query(`DELETE FROM "place"`)
         await queryRunner.query(`DELETE FROM "user"`)
