@@ -6,6 +6,7 @@ const rows = ['A', 'B', 'C', 'D', 'E', 'F'];
 let selectedSpots = new Set();
 let placesData = [];
 let currentUserRole = parseInt(localStorage.getItem('userRole') || '0');
+let selectedReservationUserId = localStorage.getItem('userId');
 
 const USER_ROLES = {
     EMPLOYEE: 0,
@@ -53,6 +54,39 @@ adminContainer.innerHTML = `
 `;
 document.body.insertBefore(adminContainer, container);
 
+const reservationUserContainer = document.createElement('div');
+reservationUserContainer.id = 'reservation-user-select';
+reservationUserContainer.style.cssText = 'display: none; margin: 0; padding: 10px 15px; background-color: #e8f4fd; border-bottom: 2px solid #3498db; align-items: center; gap: 12px; flex-wrap: wrap;';
+reservationUserContainer.innerHTML = `
+    <label for="select-reservation-user" style="font-weight: bold; color: #2c3e50;">Réserver pour :</label>
+    <select id="select-reservation-user" style="padding: 8px 12px; border: 2px solid #3498db; border-radius: 6px; font-size: 0.95em; background: white; cursor: pointer; min-width: 220px;">
+        <option value="">Chargement...</option>
+    </select>
+`;
+document.body.insertBefore(reservationUserContainer, adminContainer);
+
+const selectReservationUser = document.getElementById('select-reservation-user');
+selectReservationUser.addEventListener('change', () => {
+    selectedReservationUserId = selectReservationUser.value || localStorage.getItem('userId');
+});
+
+async function loadUsers() {
+    try {
+        const response = await fetch('/users', {
+            headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+        });
+        const users = await response.json();
+        selectReservationUser.innerHTML = users.filter(u => u.status === 0 || u.status === 1 || u.status === 2).map(u =>
+            `<option value="${u.id}">${u.firstName} ${u.lastName} (${['Employé','Secrétaire','Manager','Admin'][u.status] || u.status})</option>`
+        ).join('');
+        selectReservationUser.value = localStorage.getItem('userId');
+        selectedReservationUserId = localStorage.getItem('userId');
+    } catch (error) {
+        console.error('Error loading users:', error);
+        selectReservationUser.innerHTML = '<option value="">Erreur de chargement</option>';
+    }
+}
+
 const btnExpireSelected = document.getElementById('btn-expire-selected');
 const btnExpireAll = document.getElementById('btn-expire-all');
 const selectionInfo = document.getElementById('selection-info');
@@ -77,6 +111,7 @@ function updateUIForRole() {
     const isAdmin = currentUserRole === USER_ROLES.ADMIN;
     const isManager = currentUserRole === USER_ROLES.MANAGER;
     const isSecretary = currentUserRole === USER_ROLES.SECRETARY;
+    const isPrivileged = isSecretary || isManager || isAdmin;
     
     if (isManager || isAdmin) {
         linkDashboard.style.display = 'inline';
@@ -90,10 +125,18 @@ function updateUIForRole() {
         linkQRCodes.style.display = 'none';
     }
     
-    if (isSecretary || isManager || isAdmin) {
+    if (isPrivileged) {
         adminContainer.style.display = 'flex';
     } else {
         adminContainer.style.display = 'none';
+    }
+
+    if (isSecretary) {
+        reservationUserContainer.style.display = 'flex';
+        loadUsers();
+    } else {
+        reservationUserContainer.style.display = 'none';
+        selectedReservationUserId = localStorage.getItem('userId');
     }
 }
 
@@ -212,9 +255,10 @@ btnValider.addEventListener('click', async () => {
         const response = await fetch('/reservations/by-label', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
-            body: JSON.stringify({ labels })
+            body: JSON.stringify({ labels, userId: selectedReservationUserId })
         });
         
         const result = await response.json();

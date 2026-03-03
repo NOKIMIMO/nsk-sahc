@@ -17,20 +17,23 @@ router.post("/", async (req, res) => {
 })
 
 router.post("/by-label", async (req, res) => {
-    const { labels } = req.body
+    const { labels, userId } = req.body
     
     if (!labels || !Array.isArray(labels) || labels.length === 0) {
         return res.status(400).json({ error: "Labels array is required" })
+    }
+
+    if (!userId) {
+        return res.status(400).json({ error: "userId is required" })
     }
     
     try {
         const placeRepo = AppDataSource.getRepository(Place)
         const userRepo = AppDataSource.getRepository(User)
         
-        
-        const user = await userRepo.findOne({ where: {} })
+        const user = await userRepo.findOne({ where: { id: Number(userId) } })
         if (!user) {
-            return res.status(404).json({ error: "No user found" })
+            return res.status(404).json({ error: "User not found" })
         }
         
         const results = []

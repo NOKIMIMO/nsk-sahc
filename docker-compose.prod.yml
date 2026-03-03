@@ -1,0 +1,38 @@
+services:
+  pgsql-db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    env_file:
+      - .env
+    volumes:
+      - pgsql-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_DATABASE}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    environment:
+      DB_HOST: pgsql-db
+      DB_PORT: 5432
+      DB_SYNCHRONIZE: "false"
+    ports:
+      - "${PORT:-3000}:3000"
+    depends_on:
+      pgsql-db:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  pgsql-data:
+    driver: local
